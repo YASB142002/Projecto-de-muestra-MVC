@@ -30,6 +30,7 @@ namespace RegistroDeEstudiantes.Controllers
         /// <returns></returns>
         public List<string> ObtenerPerfiles()
         {
+
             return Models.Docente.ObtenerPerfiles();
         }
 
