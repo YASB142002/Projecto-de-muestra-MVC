@@ -27,9 +27,7 @@ namespace RegistroDeEstudiantes.Models
         /// <returns></returns>
         private int ObtenerId()
         {
-            Random random = new Random();
-            random.Next(0, 999999);
-            return Convert.ToInt32(random);
+            return new Random().Next(0, 999999);
         }
 
         /// <summary>
@@ -42,12 +40,23 @@ namespace RegistroDeEstudiantes.Models
         }
 
         /// <summary>
-        /// Retorna las materias disponibles registradas
+        /// Obtiene la lista de las materias registradas hasta el momento
         /// </summary>
-        /// <returns></returns>
-        public static List<Materia> ObtenerListaMateriaTotal()
+        /// <returns>Materias disponibles registradas en una lista de objetos anonimos</returns>
+        public static dynamic ObtenerListaMateriaTotal()
         {
-            return ListaMateria;
+            return ListaMateria.Select(ObjAnonimo => new { Id = ObjAnonimo.Id, Nombre = ObjAnonimo.Nombre_Materia, Creditos = ObjAnonimo.Creditos}).ToList();
+        }
+
+        /// <summary>
+        /// Obtiene la materia solicitada por el estudiante
+        /// </summary>
+        /// <param name="id">Id de la materia</param>
+        /// <returns>El objeto de tipo materia</returns>
+        public static Materia ObtenerMateriaSolicitada(int id)
+        {
+
+            return ListaMateria.Find(idmateria => idmateria.Id == id);
         }
     }
 }

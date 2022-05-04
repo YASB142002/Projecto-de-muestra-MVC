@@ -12,10 +12,8 @@ namespace RegistroDeEstudiantes.Controllers
         Models.Docente Docente;
         Models.Estudiante Estudiante;
         Models.Materia Materia;
-        public Controller()
-        {
 
-        }
+        public Controller(){ }
         /// <summary>
         /// Crea un nuevo objeto para ser utilizado desde la vista para poder acceder a los metodos correspondientes 
         /// </summary>
@@ -53,10 +51,10 @@ namespace RegistroDeEstudiantes.Controllers
         /// <summary>
         /// Obtiene una lista actualizada de los nombres de los docentes actuales y disponibles para impartir la asignatura
         /// </summary>
-        /// <returns></returns>
-        public List<Models.Docente> ObtenerListaDocentes()
+        /// <returns>Lista de objetos anonimos representando a los objetos docente</returns>
+        public dynamic ObtenerListaDocentes()
         {
-            return Docente.ObtenerListaDocentes();
+            return Models.Docente.ObtenerListaDocentes();
         }
 
 
@@ -78,13 +76,10 @@ namespace RegistroDeEstudiantes.Controllers
         /// Devuelte a la vista la lista de las materias disponibles registradas
         /// </summary>
         /// <returns></returns>
-        public List<Models.Materia> ObtenerListaMateria()
+        public dynamic ObtenerListaMateria()
         {
             return Models.Materia.ObtenerListaMateriaTotal();
         }
-
-
-
 
         /// <summary>
         /// Crea un nuevo registro de tipo estudiante

@@ -45,6 +45,7 @@ namespace RegistroDeEstudiantes.Views.UserControls
             this.dgvVisualizaconDeDatos.Location = new System.Drawing.Point(12, 12);
             this.dgvVisualizaconDeDatos.Name = "dgvVisualizaconDeDatos";
             this.dgvVisualizaconDeDatos.ReadOnly = true;
+            this.dgvVisualizaconDeDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVisualizaconDeDatos.Size = new System.Drawing.Size(521, 243);
             this.dgvVisualizaconDeDatos.TabIndex = 0;
             // 

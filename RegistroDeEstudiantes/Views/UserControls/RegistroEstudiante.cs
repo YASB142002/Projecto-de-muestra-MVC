@@ -18,10 +18,21 @@ namespace RegistroDeEstudiantes.Views.Tools
             InitializeComponent();
         }
 
+        private void LimpiarUserControls()
+        {
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            mtxtCedula.Text = "";
+            mtxtTelefono.Text = "";
+            mtxtCarnet.Text = "";
+            IdsClases.Clear();
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (IdsClases.Count != 0)
                 Controllers.Controller.ObtenerControl().CrearEstudiante(txtNombre.Text, txtApellido.Text, mtxtCedula.Text, mtxtTelefono.Text, mtxtCarnet.Text, IdsClases);
+
+            LimpiarUserControls();
             //validacion
         }
 

@@ -22,6 +22,7 @@ namespace RegistroDeEstudiantes.Views.UserControls
             this.Valor = valor;
             if (Valor)
             {
+                //Cuidado con darle a la propiedad datasource una lista de objetos genericos, esta trabaja solo con listas IEnumerable anonimas
                 dgvVisualizaconDeDatos.DataSource = Controllers.Controller.ObtenerControl().ObtenerListaDocentes();
                 lblClases.Text = "";
             }
@@ -59,6 +60,8 @@ namespace RegistroDeEstudiantes.Views.UserControls
                     lblClases.Text += dgvVisualizaconDeDatos.Rows[dgvVisualizaconDeDatos.CurrentRow.Index].Cells[1].Value.ToString() + ", ";
                 }
             }
+            this.Close();
+
         }
         private void btnQuitarClase_Click(object sender, EventArgs e)
         {

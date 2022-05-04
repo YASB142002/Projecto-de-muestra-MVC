@@ -17,11 +17,18 @@ namespace RegistroDeEstudiantes.Views.Tools
         {
             InitializeComponent();
         }
+        private void LimpiarUserControls()
+        {
+            txtNombre.Text = "";
+            NudCreditos.Value = 0;
+            this.id = null;
+        }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (id != null)
                 Controllers.Controller.ObtenerControl().CrearMateria(txtNombre.Text, (int)NudCreditos.Value, id);//Id corresponde al id del docente que impartira la clase
+            LimpiarUserControls();
             //validacion
         }
 

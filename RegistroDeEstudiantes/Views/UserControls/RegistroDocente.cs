@@ -17,12 +17,16 @@ namespace RegistroDeEstudiantes.Views.UserControls
             InitializeComponent();
             this.CbPerfil.DataSource = Controllers.Controller.ObtenerControl().ObtenerPerfiles();
         }
-
+        private void LimpiarUserControls()
+        {
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            mtxtCedula.Text = "";
+            mtxtTelefono.Text = "";
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Controllers.Controller.ObtenerControl().CreaDocente(txtNombre.Text, txtApellido.Text, mtxtCedula.Text, mtxtTelefono.Text, CbPerfil.SelectedIndex);
-            Form FormActual = FindForm();
-            FormActual.Close();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

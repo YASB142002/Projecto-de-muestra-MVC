@@ -9,7 +9,8 @@ namespace RegistroDeEstudiantes.Models
     public class Persona
     {
         protected int Id { get; set; }
-        protected string Nombre, Apellido, Cedula, Telefono;
+        protected string Nombre { get; set; }
+        protected string Apellido, Cedula, Telefono;
         
 
         public Persona(string nombre, string apellido, string cedula, string telefono)

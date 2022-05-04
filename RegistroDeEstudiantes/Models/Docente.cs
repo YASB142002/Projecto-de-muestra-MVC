@@ -23,13 +23,17 @@ namespace RegistroDeEstudiantes.Models
     {
         protected int Perfil { get; set; }
         private static readonly List<string> Licenciaturas = new List<string>();
-        protected static List<Docente> ListaDocentes = new List<Docente>();
+        protected static List<Docente> ListaDocentes = new List<Docente>() 
+        {
+            new Docente("Yerik", "Sequeira", "0011408021018V", "88645369", 6){Id = ObtenerId()}
+        };
 
         public Docente(string nombre, string apellido, string cedula, string telefono, int perfil) : base (nombre, apellido, cedula, telefono)
         {
             this.Id = ObtenerId();
             this.Perfil = perfil;
         }
+
         /// <summary>
         /// Entrega en una lista todas posibles perfiles que puede tener un docente
         /// </summary>
@@ -38,11 +42,10 @@ namespace RegistroDeEstudiantes.Models
         {
             string[] Numeracion = Enum.GetNames(typeof(Licenciatura));
             foreach (var item in Numeracion)
-            {
                 Licenciaturas.Add(item.Replace("_", " "));
-            }
             return Licenciaturas;
         }
+
         /// <summary>
         /// Agrega el nuevo registro del docente y lo guarda en una lista de docentes disponibles
         /// </summary>
@@ -51,14 +54,16 @@ namespace RegistroDeEstudiantes.Models
         {
             ListaDocentes.Add(Maestro);
         }
+
         /// <summary>
-        /// Entrega una lista de docentes que se tiene registro hasta el momento 
+        /// Entrega una lista de docentes que se tiene registro hasta el momento
         /// </summary>
-        /// <returns></returns>
-        public List<Docente> ObtenerListaDocentes()
+        /// <returns>Una lista de objetos anonimos para ser compatible con la propiedad datasource del datagridview</returns>
+        public static dynamic ObtenerListaDocentes()
         {
-            return ListaDocentes;
+            return ListaDocentes.Select(ObjAnonimo => new { Id = ObjAnonimo.Id, Nombre = ObjAnonimo.Nombre, Apellido = ObjAnonimo.Apellido, Cedula = ObjAnonimo.Cedula, Telefono = ObjAnonimo.Telefono, Perfil = (Licenciatura)ObjAnonimo.Perfil }).ToList();
         }
+
         /// <summary>
         /// Retorna un objeto de tipo Docente el cual ha sido solicitado en especifico
         /// </summary>
@@ -66,7 +71,7 @@ namespace RegistroDeEstudiantes.Models
         /// <returns></returns>
         public static Docente ObtenerDocente(int? idDocente)
         {
-            Docente profe = (Docente)ListaDocentes.Where(id => id.Id == idDocente);
+            Docente profe = ListaDocentes.Where(id => id.Id == idDocente).First();
             return profe;
         }
     }

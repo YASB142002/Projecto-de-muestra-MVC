@@ -18,7 +18,6 @@ namespace RegistroDeEstudiantes.Models
             this.Carnet = carnet;
             this.Clases = clases;
         }
-
         /// <summary>
         /// Retorna la lista  de materias solicitadas por el estudiante en registro
         /// </summary>
@@ -29,11 +28,16 @@ namespace RegistroDeEstudiantes.Models
             List<Materia> ListaSolicitada = new List<Materia>();
             ListaIdsClases.ForEach(id =>
             {
-                ListaSolicitada.Add(Materia.ObtenerListaMateriaTotal().Find(idmateria => idmateria.Id == id));
+                ListaSolicitada.Add(Materia.ObtenerMateriaSolicitada(id));
             });
             return ListaSolicitada;
         }
 
+        /// <summary>
+        /// Agrega el estudiante a registrar a la lista de estudiatnes
+        /// </summary>
+        /// <param name="estudiante"></param>
+        /// <returns></returns>
         public static bool AgregarEstudiantes(Estudiante estudiante)
         {
             ListaEstudiantes.Add(estudiante);
