@@ -29,6 +29,7 @@ namespace RegistroDeEstudiantes.Views.Tools
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,7 +47,9 @@ namespace RegistroDeEstudiantes.Views.Tools
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSeleccionClases = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.NudEdad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -206,14 +209,20 @@ namespace RegistroDeEstudiantes.Views.Tools
             // 
             // btnSeleccionClases
             // 
+            this.btnSeleccionClases.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSeleccionClases.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeleccionClases.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeleccionClases.Location = new System.Drawing.Point(103, 257);
+            this.btnSeleccionClases.Location = new System.Drawing.Point(106, 254);
             this.btnSeleccionClases.Name = "btnSeleccionClases";
-            this.btnSeleccionClases.Size = new System.Drawing.Size(163, 23);
+            this.btnSeleccionClases.Size = new System.Drawing.Size(160, 28);
             this.btnSeleccionClases.TabIndex = 26;
             this.btnSeleccionClases.Text = "Seleccionar..";
             this.btnSeleccionClases.UseVisualStyleBackColor = true;
             this.btnSeleccionClases.Click += new System.EventHandler(this.btnSeleccionClases_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // RegistroEstudiante
             // 
@@ -239,6 +248,7 @@ namespace RegistroDeEstudiantes.Views.Tools
             this.Name = "RegistroEstudiante";
             this.Size = new System.Drawing.Size(300, 350);
             ((System.ComponentModel.ISupportInitialize)(this.NudEdad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,5 +273,6 @@ namespace RegistroDeEstudiantes.Views.Tools
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnSeleccionClases;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -104,7 +104,6 @@ namespace RegistroDeEstudiantes.Views.UserControls
             this.Controls.Add(this.dgvVisualizaconDeDatos);
             this.Name = "VisualizacionDeOpciones";
             this.Text = "VisualizacionDeOpciones";
-            this.Load += new System.EventHandler(this.VisualizacionDeOpciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizaconDeDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

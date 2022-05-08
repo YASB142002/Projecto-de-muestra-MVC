@@ -126,10 +126,12 @@ namespace RegistroDeEstudiantes.Views.Tools
             // 
             // btnSeleccionDocente
             // 
+            this.btnSeleccionDocente.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSeleccionDocente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeleccionDocente.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeleccionDocente.Location = new System.Drawing.Point(112, 101);
+            this.btnSeleccionDocente.Location = new System.Drawing.Point(112, 98);
             this.btnSeleccionDocente.Name = "btnSeleccionDocente";
-            this.btnSeleccionDocente.Size = new System.Drawing.Size(163, 23);
+            this.btnSeleccionDocente.Size = new System.Drawing.Size(160, 28);
             this.btnSeleccionDocente.TabIndex = 27;
             this.btnSeleccionDocente.Text = "Seleccionar..";
             this.btnSeleccionDocente.UseVisualStyleBackColor = true;

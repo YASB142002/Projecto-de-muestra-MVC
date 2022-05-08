@@ -22,12 +22,18 @@ namespace RegistroDeEstudiantes.Views.Tools
             txtNombre.Text = "";
             NudCreditos.Value = 0;
             this.id = null;
+            btnSeleccionDocente.FlatAppearance.BorderColor = Color.Red;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (id != null)
                 Controllers.Controller.ObtenerControl().CrearMateria(txtNombre.Text, (int)NudCreditos.Value, id);//Id corresponde al id del docente que impartira la clase
+            else
+            {
+                MessageBox.Show("Debe seleccionar un docente para impartir la clase");
+                return;
+            }
             LimpiarUserControls();
             //validacion
         }
@@ -43,7 +49,7 @@ namespace RegistroDeEstudiantes.Views.Tools
             UserControls.VisualizacionDeOpciones FormVisualizador = new UserControls.VisualizacionDeOpciones(true);
             FormVisualizador.ShowDialog();
             id = FormVisualizador.id;
-
+            btnSeleccionDocente.FlatAppearance.BorderColor = Color.Green;
         }
     }
 }

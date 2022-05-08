@@ -30,11 +30,8 @@ namespace RegistroDeEstudiantes.Controllers
         /// <returns></returns>
         public List<string> ObtenerPerfiles()
         {
-
             return Models.Docente.ObtenerPerfiles();
         }
-
-
 
         /// <summary>
         /// Crea un nuevo objeto para el registro de un nuevo maestro 
@@ -58,8 +55,6 @@ namespace RegistroDeEstudiantes.Controllers
             return Models.Docente.ObtenerListaDocentes();
         }
 
-
-
         /// <summary>
         /// Funcion para crear una nueva materia
         /// </summary>
@@ -81,6 +76,10 @@ namespace RegistroDeEstudiantes.Controllers
         {
             return Models.Materia.ObtenerListaMateriaTotal();
         }
+        public int ObtenerCreditoMateria(int idmateria)
+        {
+            return Models.Materia.ObtenerMateriaSolicitada(idmateria).Creditos;
+        }
 
         /// <summary>
         /// Crea un nuevo registro de tipo estudiante
@@ -97,7 +96,5 @@ namespace RegistroDeEstudiantes.Controllers
             Models.Estudiante.AgregarEstudiantes(Estudiante = new Models.Estudiante(nombre, apellido, cedula, telefono, carnet, Models.Estudiante.ObtenerMateriasSolicitadas(IdsClases)));
             return true;
         }
-
-
     }
 }

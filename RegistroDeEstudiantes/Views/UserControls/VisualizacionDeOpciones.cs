@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RegistroDeEstudiantes.Views.UserControls
@@ -13,24 +7,23 @@ namespace RegistroDeEstudiantes.Views.UserControls
     public partial class VisualizacionDeOpciones : Form
     {
         internal int? id;
-        internal List<int> IdsClase = new List<int>();
-
+        internal SortedList<int, int> IdsClase = new SortedList<int, int>();
         private bool Valor;
+
         public VisualizacionDeOpciones(bool valor)
         {
             InitializeComponent();
             this.Valor = valor;
-            if (Valor)
+            if (Valor) // True si es registro de materia y false para registro de estudiantes
             {
                 //Cuidado con darle a la propiedad datasource una lista de objetos genericos, esta trabaja solo con listas IEnumerable anonimas
                 dgvVisualizaconDeDatos.DataSource = Controllers.Controller.ObtenerControl().ObtenerListaDocentes();
                 lblClases.Text = "";
+                btnQuitarClase.Visible = false;
             }
             else
                 dgvVisualizaconDeDatos.DataSource = Controllers.Controller.ObtenerControl().ObtenerListaMateria();
-
         }
-
 
         /// <summary>
         /// Devuelte el valor de la casilla 0 del datagridview
@@ -47,21 +40,34 @@ namespace RegistroDeEstudiantes.Views.UserControls
                 return null;
             }
         }
+
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             int? RetornarId = GetId();
             if (RetornarId != null)
             {
                 if (Valor)
+                {
                     this.id = RetornarId;
+                    this.Close();
+                }
                 else
                 {
-                    IdsClase.Add((int)RetornarId);
+                    int conteocreditos = 0;
+                    foreach (var item in IdsClase)
+                        conteocreditos += item.Value;
+
+                    if (conteocreditos > 20)
+                    {
+                        MessageBox.Show("No puede inscribir mas clases. \n\t El maximo de creditos es 20");
+                        return;
+                    }
+                    IdsClase.Add((int)RetornarId, Controllers.Controller.ObtenerControl().ObtenerCreditoMateria((int)RetornarId)); 
+                    //System.ArgumentException: 'Ya existe una entrada con la misma clave.'--------------------------------------------------------------------------------------
+
                     lblClases.Text += dgvVisualizaconDeDatos.Rows[dgvVisualizaconDeDatos.CurrentRow.Index].Cells[1].Value.ToString() + ", ";
                 }
             }
-            this.Close();
-
         }
         private void btnQuitarClase_Click(object sender, EventArgs e)
         {
@@ -71,27 +77,16 @@ namespace RegistroDeEstudiantes.Views.UserControls
                 if (!Valor)
                 {
                     IdsClase.Remove((int)RetornarId);
-
                     lblClases.Text = "Clases Seleccionadas: ";
-                    IdsClase.ForEach(id => 
-                    {
-                        lblClases.Text += dgvVisualizaconDeDatos.Rows[id].Cells[1].Value.ToString() + ", ";
-                    });
                     
+                    foreach (var item in IdsClase)
+                        lblClases.Text += dgvVisualizaconDeDatos.Rows[item.Key].Cells[1].Value.ToString() + ", ";
                 }
             }
         }
-
-
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void VisualizacionDeOpciones_Load(object sender, EventArgs e)
-        {
-            
         }
     }
 }

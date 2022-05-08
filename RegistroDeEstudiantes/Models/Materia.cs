@@ -10,7 +10,7 @@ namespace RegistroDeEstudiantes.Models
     {
         internal int Id { get; set; }
         protected string Nombre_Materia { get; set; }
-        protected int Creditos { get; set; }
+        internal int Creditos { get; set; }
         protected Docente Maestro { get; set; }
         protected static List<Materia> ListaMateria = new List<Materia>();
         public Materia(string nombre, int credito, Docente profe)
