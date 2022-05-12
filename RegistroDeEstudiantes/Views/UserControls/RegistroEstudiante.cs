@@ -13,6 +13,7 @@ namespace RegistroDeEstudiantes.Views.Tools
     public partial class RegistroEstudiante : UserControl
     {
         private List<int> IdsClases = new List<int>();
+        private bool valid;
         public RegistroEstudiante()
         {
             InitializeComponent();
@@ -21,8 +22,13 @@ namespace RegistroDeEstudiantes.Views.Tools
         /// <summary>
         /// Funcion para limpiar controladores luego de un nuevo registro
         /// </summary>
-        private void LimpiarUserControls()
+        public void LimpiarUserControls()
         {
+            //Cambio de la funcion ParametersValidation a CleanError en todos los usercontrol de registro
+            //Registra al docente de todas formas
+            //Marca en registroMateria como seleccionado el docente aun no seleccionado el docente
+            CleanError();
+            NudEdad.Value = 0;
             txtNombre.Text = "";
             txtApellido.Text = "";
             mtxtCedula.Text = "";
@@ -32,37 +38,76 @@ namespace RegistroDeEstudiantes.Views.Tools
             IdsClases.Clear();
         }
 
+        #region Validaciones de los UserControls
+
         /// <summary>
         /// Evalua todos los controladores si cumplen los requerimientos necesarios para el nuevo registro
         /// </summary>
         /// <returns>True = Si alguno no cumple; False = Si todos cumplen</returns>
-        public bool ParametersValidation()
+        private bool ParametersValidation()
         {
-            bool valid = false;
-            ValidatedTxtBox(txtNombre, valid);
-            ValidatedTxtBox(txtApellido, valid);
-            ValidatedMaskTxtBox(mtxtCedula, valid);
-            ValidatedMaskTxtBox(mtxtTelefono, valid);
-            ValidatedMaskTxtBox(mtxtCarnet, valid);
+            valid = false;
+            valid = ValidatedTxtBox(txtNombre);
+            valid = ValidatedTxtBox(txtApellido);
+            valid = ValidatedMaskTxtBox(mtxtCedula);
+            valid = ValidatedMaskTxtBox(mtxtTelefono);
+            valid = ValidatedMaskTxtBox(mtxtCarnet);
+            valid = ValidatedNumericUpDown(NudEdad);
             return valid;
         }
 
-
-        public bool ValidatedNumericUpDown(NumericUpDown control, bool valid)
+        /// <summary>
+        /// Sentencia lambda para determinar si la validacion ya es true or false
+        /// </summary>
+        private Func<bool, bool> KeepError = bol => 
         {
-            if (!control.Value.Equals(0))
-            {
-                errorProvider1.SetError(control, "Debe ingresar una edad valida");
-            }
-            else
-                errorProvider1.SetError(control, null);
-            if (!valid)//Si la validacion ya es true que no la cambie nunca
+            if (!bol)//Si la validacion ya es true que no la cambie nunca
                 return false;
             else
                 return true;
+        };
+
+        /// <summary>
+        /// Limpia todos los controles de la marca de error
+        /// </summary>
+        public void CleanError()
+        {
+            errorProvider1.SetError(txtNombre, null);
+            errorProvider1.SetError(txtApellido, null);
+            errorProvider1.SetError(mtxtCedula, null);
+            errorProvider1.SetError(mtxtTelefono, null);
+            errorProvider1.SetError(mtxtCarnet, null);
+            errorProvider1.SetError(NudEdad, null);
+            errorProvider1.SetError(btnSeleccionClases, null);
         }
 
-        public bool ValidatedMaskTxtBox(MaskedTextBox control, bool valid)
+        /// <summary>
+        /// Funcion para validar NumericUpDown
+        /// </summary>
+        /// <param name="control">Control a validar</param>
+        /// <param name="valid">Variable auxiliar para detectar si el controlador no cumple los parametros requeridos</param>
+        /// <returns>True = No cumple los requisitos; False = Cumple los requisitos</returns>
+        private bool ValidatedNumericUpDown(NumericUpDown control)
+        {
+            if (control.Value.Equals(0))
+            {
+                errorProvider1.SetError(control, "Debe ingresar una edad valida");
+                return true;
+            }
+            else
+            {
+                errorProvider1.SetError(control, null);
+                return KeepError(valid);
+            }
+        }
+
+        /// <summary>
+        /// Funcion para validar MaskTextBox
+        /// </summary>
+        /// <param name="control">Control a validar</param>
+        /// <param name="valid">Variable auxiliar para detectar si el controlador no cumple los parametros requeridos</param>
+        /// <returns>True = No cumple los requisitos; False = Cumple los requisitos</returns>
+        private bool ValidatedMaskTxtBox(MaskedTextBox control)
         {
             if (!control.MaskCompleted)
             {
@@ -70,21 +115,20 @@ namespace RegistroDeEstudiantes.Views.Tools
                 return true;
             }
             else
+            {
                 errorProvider1.SetError(control, null);
-            if (!valid)//Si la validacion ya es true que no la cambie nunca
-                return false;
-            else
-                return true;
+                return KeepError(valid);
+            }
         }
 
 
         /// <summary>
-        /// Funcion para validar controlador
+        /// Funcion para validar TextBox
         /// </summary>
         /// <param name="control">Control a validar</param>
         /// <param name="valid">Variable auxiliar para detectar si el controlador no cumple los parametros requeridos</param>
         /// <returns>True = No cumple los requisitos; False = Cumple los requisitos</returns>
-        public bool ValidatedTxtBox(TextBox control, bool valid)
+        private bool ValidatedTxtBox(TextBox control)
         {
             if (string.IsNullOrEmpty(control.Text))
             {
@@ -92,33 +136,34 @@ namespace RegistroDeEstudiantes.Views.Tools
                 return valid = true;
             }
             else
+            {
                 errorProvider1.SetError(control, null);
-            if (!valid)//Si la validacion ya es true que no la cambie nunca
-                return valid = false;
-            else
-                return valid = true;
-
+                return KeepError(valid);
+            }
         }
+
+        #endregion
+
+        #region Eventos Form
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (ParametersValidation())
-                return;
-            else
+            if (!ParametersValidation())
             {
                 if (IdsClases.Count != 0)
                 {
+                    errorProvider1.SetError(btnSeleccionClases, null);
                     Controllers.Controller.ObtenerControl().CrearEstudiante(txtNombre.Text, txtApellido.Text, mtxtCedula.Text, mtxtTelefono.Text, mtxtCarnet.Text, IdsClases);
-                    errorProvider1.SetError(btnSeleccionClases, "Debe seleccionar una clase como minimo");
+                    LimpiarUserControls();
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar una clase como minimo");
-                    errorProvider1.SetError(btnSeleccionClases, null);
+                    errorProvider1.SetError(btnSeleccionClases, "Debe seleccionar una clase como minimo");
                     return;
                 }
-
-                LimpiarUserControls();
             }
+            else
+                return;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -135,5 +180,7 @@ namespace RegistroDeEstudiantes.Views.Tools
             if (IdsClases.Count != 0)
                 btnSeleccionClases.FlatAppearance.BorderColor = Color.Green; 
         }
+
+        #endregion
     }
 }

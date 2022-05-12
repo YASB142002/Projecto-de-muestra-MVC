@@ -29,6 +29,7 @@ namespace RegistroDeEstudiantes.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -44,7 +45,9 @@ namespace RegistroDeEstudiantes.Views.UserControls
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CbPerfil = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.NudEdad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
@@ -191,6 +194,10 @@ namespace RegistroDeEstudiantes.Views.UserControls
             this.CbPerfil.Size = new System.Drawing.Size(163, 26);
             this.CbPerfil.TabIndex = 40;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // RegistroDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,6 +220,7 @@ namespace RegistroDeEstudiantes.Views.UserControls
             this.Name = "RegistroDocente";
             this.Size = new System.Drawing.Size(300, 350);
             ((System.ComponentModel.ISupportInitialize)(this.NudEdad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,5 +243,6 @@ namespace RegistroDeEstudiantes.Views.UserControls
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CbPerfil;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

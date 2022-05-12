@@ -17,8 +17,8 @@ namespace RegistroDeEstudiantes.Views
             InitializeComponent();
             //----------UserControl----------
             this.rgEstudiante = new Tools.RegistroEstudiante(); 
-            this.rgDocente = new UserControls.RegistroDocente();
             this.rgMateria = new Tools.RegistroMateria();
+            this.rgDocente = new UserControls.RegistroDocente();
             //
             //PnlUserControls
             //
@@ -32,36 +32,46 @@ namespace RegistroDeEstudiantes.Views
 
         private void RbEstudiantes_CheckedChanged(object sender, EventArgs e)
         {
-            AddUserControl(rgEstudiante);
+            if (!AddUserControl(rgEstudiante))
+            {
+                rgEstudiante.LimpiarUserControls();
+                rgEstudiante.CleanError();
+            }
         }
 
         private void RbMateria_CheckedChanged(object sender, EventArgs e)
         {
-            AddUserControl(rgMateria);
+            if (!AddUserControl(rgMateria))
+            {
+                rgMateria.LimpiarUserControls();
+                //rgMateria.CleanError();
+            }
         }
 
         private void RbDocentes_CheckedChanged(object sender, EventArgs e)
         {
-            AddUserControl(rgDocente);
+            if (!AddUserControl(rgDocente))
+            {
+                rgDocente.LimpiarUserControls();
+                rgDocente.CleanError();
+            }
         }
-
-
-
 
         /// <summary>
         /// Agrega los UserControls al formulario correspondiente
         /// </summary>
         /// <param name="control"> Control correspondiente para agregar</param>
-        private void AddUserControl(UserControl control)
+        private bool AddUserControl(UserControl control)
         {
             if (!this.PnlUserControls.Controls.Contains(control))
             {
                 this.PnlUserControls.Controls.Clear();
                 this.PnlUserControls.Controls.Add(control);
+                return true;
             }
+            return false;
         }
 
-        
         /// <summary>
         /// Control personalizado Registro Docente, realizado para simplificar el registro de los datos de un docente
         /// </summary>

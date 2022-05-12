@@ -29,6 +29,7 @@ namespace RegistroDeEstudiantes.Views.Tools
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,14 +39,16 @@ namespace RegistroDeEstudiantes.Views.Tools
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSeleccionDocente = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.NudCreditos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(112, 59);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(160, 20);
+            this.txtNombre.Size = new System.Drawing.Size(143, 20);
             this.txtNombre.TabIndex = 5;
             // 
             // label1
@@ -81,14 +84,14 @@ namespace RegistroDeEstudiantes.Views.Tools
             // NudCreditos
             // 
             this.NudCreditos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NudCreditos.Location = new System.Drawing.Point(213, 142);
+            this.NudCreditos.Location = new System.Drawing.Point(203, 142);
             this.NudCreditos.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.NudCreditos.Name = "NudCreditos";
-            this.NudCreditos.Size = new System.Drawing.Size(59, 26);
+            this.NudCreditos.Size = new System.Drawing.Size(52, 26);
             this.NudCreditos.TabIndex = 8;
             this.NudCreditos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -116,9 +119,9 @@ namespace RegistroDeEstudiantes.Views.Tools
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(172, 183);
+            this.btnCancelar.Location = new System.Drawing.Point(162, 183);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 44);
+            this.btnCancelar.Size = new System.Drawing.Size(93, 44);
             this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -131,11 +134,15 @@ namespace RegistroDeEstudiantes.Views.Tools
             this.btnSeleccionDocente.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeleccionDocente.Location = new System.Drawing.Point(112, 98);
             this.btnSeleccionDocente.Name = "btnSeleccionDocente";
-            this.btnSeleccionDocente.Size = new System.Drawing.Size(160, 28);
+            this.btnSeleccionDocente.Size = new System.Drawing.Size(143, 28);
             this.btnSeleccionDocente.TabIndex = 27;
             this.btnSeleccionDocente.Text = "Seleccionar..";
             this.btnSeleccionDocente.UseVisualStyleBackColor = true;
             this.btnSeleccionDocente.Click += new System.EventHandler(this.btnSeleccionDocente_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // RegistroMateria
             // 
@@ -154,6 +161,7 @@ namespace RegistroDeEstudiantes.Views.Tools
             this.Name = "RegistroMateria";
             this.Size = new System.Drawing.Size(300, 250);
             ((System.ComponentModel.ISupportInitialize)(this.NudCreditos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,5 +178,6 @@ namespace RegistroDeEstudiantes.Views.Tools
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSeleccionDocente;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
